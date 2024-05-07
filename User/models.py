@@ -43,7 +43,7 @@ class UserAccount(AbstractUser):
         verbose_name_plural = "Пользователи"
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.id} {self.first_name} {self.last_name}"
 
 
 class Student(models.Model):
@@ -68,9 +68,11 @@ class Student(models.Model):
         return f"{self.user.first_name} {self.user.last_name}"
 
     def clean(self):
-        teacher = getattr(self.user, "teacher", None)
+        # teacher = getattr(self.user, "teacher", None)
+        teacher = Teacher.objects.filter(user=self.user).exists()
 
         if teacher:
+            print(teacher)
             errors = {"user": "Учитель не может быть учеником"}
             raise ValidationError(errors)
 

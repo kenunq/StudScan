@@ -4,5 +4,7 @@ db.sqlite3
 .git
 
 .ruff_cache
+
 venv
 
+.env
