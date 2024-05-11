@@ -58,13 +58,12 @@ class LogoutView(APIView):
 @extend_schema(tags=["Student"])
 class StudentListView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = StudentListSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     queryset = Student.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["group__name"]
 
     def get_serializer_class(self):
-        print(self.action)
         if self.action == "list":
             return StudentListSerializer
         return StudentRetrieveSerializer
@@ -77,5 +76,5 @@ class StudentListView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
 @extend_schema(tags=["Teacher"])
 class TeacherView(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = TeacherRetrieveSerializer
-    permission_classes = [IsTeacher]
+    # permission_classes = [IsTeacher]
     queryset = Teacher.objects.all()

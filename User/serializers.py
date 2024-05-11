@@ -31,6 +31,7 @@ class StudentListSerializer(serializers.ModelSerializer):
 
 
 class StudentRetrieveSerializer(serializers.ModelSerializer):
+    group = serializers.ReadOnlyField(source="group.name")
     user = UserMeSetializer()
 
     class Meta:

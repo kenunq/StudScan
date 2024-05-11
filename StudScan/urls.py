@@ -3,6 +3,7 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework.routers import DefaultRouter
 
+from report.views import UserReport
 from User.views import LoginView, LogoutView, StudentListView, TeacherView
 
 
@@ -14,6 +15,7 @@ router.register("teacher", TeacherView, basename="teacher")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include(router.urls)),
+    path("api/v1/user-report/", UserReport.as_view(), name="user-report"),
     # spectacular
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     # optional ui:
